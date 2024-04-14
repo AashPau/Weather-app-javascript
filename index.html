@@ -12,6 +12,9 @@
 				<input type="text" placeholder="enter city name" spellcheck="false" />
 				<button><img src="images/search.png" /></button>
 			</div>
+			<div class="error">
+				<p>Invalid city name</p>
+			</div>
 			<div class="weather">
 				<img src="images/rain.png" alt="" class="weather-icon" />
 				<h1 class="temp">22°C</h1>
@@ -34,44 +37,6 @@
 				</div>
 			</div>
 		</div>
-		<script>
-			const apiKey = "2c6e2ecd97a685d9c3f5268f412121a3";
-			const apiUrl =
-				"https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
-
-			const searchBox = document.querySelector(".search input");
-			const searchBtn = document.querySelector(".search button");
-
-			async function checkweather(city) {
-				const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
-				var data = await response.json();
-
-				const weatherIcon = document.querySelector(".weather-icon");
-
-				console.log(data);
-				document.querySelector(".city").innerHTML = data.name;
-				document.querySelector(".temp").innerHTML =
-					Math.round(data.main.temp) + "°c";
-				document.querySelector(".humidity").innerHTML =
-					data.main.humidity + "%";
-				document.querySelector(".wind").innerHTML = data.wind.speed + " km/hr";
-
-				if (data.weather[0].main == "Clouds") {
-					weatherIcon.src = "images/clouds.png";
-				} else if (data.weather[0].main == "Clear") {
-					weatherIcon.src = "images/clear.png";
-				} else if (data.weather[0].main == "Rain") {
-					weatherIcon.src = "images/rain.png";
-				} else if (data.weather[0].main == "Drizzle") {
-					weatherIcon.src = "images/drizzle.png";
-				} else if (data.weather[0].main == "Mist") {
-					weatherIcon.src = "images/mist.png";
-				}
-			}
-
-			searchBtn.addEventListener("click", () => {
-				checkweather(searchBox.value);
-			});
-		</script>
+		<script src="script.js"></script>
 	</body>
 </html>
